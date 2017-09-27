@@ -1,0 +1,76 @@
+import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
+import axios from 'axios';
+
+const getSuggestionValue = suggestion => suggestion.name;
+
+const renderSuggestion = suggestion => (
+  <div>{suggestion.name + ' (' + suggestion.exchDisp + ') - ' + suggestion.typeDisp}</div>
+);
+
+class StockSearch extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+      suggestions: []
+    }
+  }
+
+  searchResults = (ticker) => {
+    const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/${ticker}`;
+    axios.get(url).then((res) => {
+      this.setState({suggestions: res.data.ResultSet.Result});
+    }).catch((er) => {
+      console.log(er);
+    });
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({ value: newValue }, () => {
+      this.setState({suggestions: []});
+      if (newValue.length > 0) {
+        this.searchResults(newValue);
+      }
+    });
+  }
+
+  onSuggestionsFetchRequested = () => { }
+
+  onSuggestionsClearRequested = () => { }
+
+  onSuggestionSelected = (event, item) => {
+    this.props.addTicker(item.suggestion.symbol);
+    this.setState({value: ''});
+  }
+
+  render() {
+
+    const { value, suggestions } = this.state;
+
+    const inputProps = {
+      placeholder: 'Select a ticker...',
+      value,
+      onChange: this.onChange
+    };
+
+    return (
+      <div className="StockSearch">
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+          onSuggestionSelected={this.onSuggestionSelected}
+          focusInputOnSuggestionClick={false}
+        />
+      </div>
+    );
+  }
+
+}
+
+export default StockSearch;
