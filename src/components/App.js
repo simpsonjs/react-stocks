@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NotificationSystem from 'react-notification-system';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import StockList from '../containers/StockList';
 import StockData from '../containers/StockData';
 import '../css/App.css';
@@ -11,41 +11,19 @@ class App extends Component {
   }
 
   addNotification = (title, message, level) => {
-    this.notificationSystem.addNotification({
-      title: title,
-      message: message,
-      level: level,
-      autoDismiss: 2,
-      dismissible: false
-    });
+    switch (level) {
+      case 'success':
+        NotificationManager.success(message, title, 2000);        
+        break;
+      case 'error':
+        NotificationManager.error(message, title, 2000);                
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
-
-    const style = {
-      NotificationItem: {
-        success: {
-          color: '#000000',
-          backgroundColor: '#5ea400',
-          fontSize: '16px'
-        },
-        error: {
-          color: '#000000',
-          backgroundColor: '#ec3d3d',
-          fontSize: '16px'
-        }
-      },
-      Title: {
-        success: {
-          color: '#000000',
-          fontSize: '24px',
-        },
-        error: {
-          color: '#000000',
-          fontSize: '24px',
-        }
-      }
-    }
 
     return (
       <div className="App">
@@ -56,7 +34,7 @@ class App extends Component {
           <StockData />
 
         </div>
-        <NotificationSystem ref="notificationSystem" style={style} />
+        <NotificationContainer/>
       </div>
     );
   }

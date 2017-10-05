@@ -7,6 +7,7 @@ import ReduxThunk from 'redux-thunk';
 
 import App from './components/App';
 import reducers from './reducers';
+import 'react-notifications/lib/notifications.css';
 import './css/index.css';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise, ReduxThunk)(createStore);
