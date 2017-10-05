@@ -215,7 +215,7 @@ const StatsTab = ({ companyStats, tickerInfo }) => {
         </table>
       </div>
 
-      <h3 className="section-heading blue-header">Dividends & Splits</h3>
+      <h3 className="section-heading blue-header">Dividends &amp; Splits</h3>
       <div className="col-md-12">
         <table className="table">
           <tbody>

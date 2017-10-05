@@ -1,5 +1,5 @@
 import { FETCH_TICKER_DATA, GET_OPTION_DATA, GET_COMPANY_DATA,
-  GET_COMPANY_STATS, GET_NEWS_DATA, GET_CHART_DATA } from '../actions/index';
+  GET_COMPANY_STATS, GET_NEWS_DATA, GET_CHART_DATA, CHANGE_CURRENT_INDEX } from '../actions/index';
 
 const INIT_STATE = {
   tickerInfo: [],
@@ -7,7 +7,8 @@ const INIT_STATE = {
   companyInfo: [],
   companyStats: [],
   newsInfo: [],
-  chartData: []
+  chartData: [],
+  index: null
 };
 
 export default function(state = INIT_STATE, action) {
@@ -42,6 +43,11 @@ export default function(state = INIT_STATE, action) {
       return {
         ...state,
         chartData: action.payload
+      }
+    case CHANGE_CURRENT_INDEX:
+      return {
+        ...state,
+        index: action.payload
       }
     default:
       return state;

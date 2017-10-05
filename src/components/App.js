@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NotificationSystem from 'react-notification-system';
-import StockList from '../containers/stocklist';
-import StockData from '../containers/stockdata';
+import StockList from '../containers/StockList';
+import StockData from '../containers/StockData';
 import '../css/App.css';
 
 class App extends Component {

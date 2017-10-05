@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTickerInfo, removeTicker, addTicker, getUserData, changeCurrentIndex } from '../actions/index';
-import StockSearch from '../components/stocksearch';
-import TickerList from '../components/tickerlist';
-import '../css/stocklist.css';
+import StockSearch from '../components/StockSearch';
+import TickerList from '../components/TickerList';
+import '../css/StockList.css';
 
 class StockList extends Component {
 

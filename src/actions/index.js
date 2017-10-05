@@ -12,8 +12,10 @@ export const GET_COMPANY_STATS = 'GET_COMPANY_STATS';
 export const GET_NEWS_DATA = 'GET_NEWS_DATA';
 export const GET_CHART_DATA = 'GET_CHART_DATA';
 
+export const BASE_URL = 'http://stocks.thejoshuasimpson.com';
+
 export function getChartData(ticker) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/chart/${ticker}`;
+  const url = `${BASE_URL}/api/stocks/chart/${ticker}`;
   const request = axios.get(url);
   return {
     type: GET_CHART_DATA,
@@ -22,7 +24,7 @@ export function getChartData(ticker) {
 }
 
 export function getNewsData(ticker) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/news/${ticker}`;
+  const url = `${BASE_URL}/api/stocks/news/${ticker}`;
   const request = axios.get(url);
   return {
     type: GET_NEWS_DATA,
@@ -31,7 +33,7 @@ export function getNewsData(ticker) {
 }
 
 export function getCompanyStats(ticker) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/stats/${ticker}`;
+  const url = `${BASE_URL}/api/stocks/stats/${ticker}`;
   const request = axios.get(url);
   return {
     type: GET_COMPANY_STATS,
@@ -40,7 +42,7 @@ export function getCompanyStats(ticker) {
 }
 
 export function getCompanyData(ticker) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/company/${ticker}`;
+  const url = `${BASE_URL}/api/stocks/company/${ticker}`;
   const request = axios.get(url);
   return {
     type: GET_COMPANY_DATA,
@@ -51,9 +53,9 @@ export function getCompanyData(ticker) {
 export function getOptionData(ticker, date) {
   let url;
   if (date === null) {
-    url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/options/${ticker}`;
+    url = `${BASE_URL}/api/stocks/options/${ticker}`;
   } else {
-    url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/options/${ticker}?date=${date}`;
+    url = `${BASE_URL}/api/stocks/options/${ticker}?date=${date}`;
   }
   const request = axios.get(url);
   return {
@@ -63,7 +65,7 @@ export function getOptionData(ticker, date) {
 }
 
 export function getTickerInfo(tickers) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/tickerinfo/${tickers}`;
+  const url = `${BASE_URL}/api/stocks/tickerinfo/${tickers}`;
   const request = axios.get(url);
   return {
     type: FETCH_TICKER_DATA,
@@ -72,7 +74,7 @@ export function getTickerInfo(tickers) {
 }
 
 export function getUserData(user) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/users/${user}`;
+  const url = `${BASE_URL}/api/users/${user}`;
   const request = axios.get(url);
   return (dispatch, getState) => {
     request.then((res) => {
@@ -84,7 +86,7 @@ export function getUserData(user) {
 }
 
 export function updateUserData(user) {
-  const url = `https://limitless-mesa-18659.herokuapp.com/api/users/${user._id}`;
+  const url = `${BASE_URL}/api/users/${user._id}`;
   const request = axios.patch(url, {
     tickers: user.tickers
   });

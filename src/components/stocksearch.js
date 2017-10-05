@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
+import { BASE_URL } from '../actions';
 
 const getSuggestionValue = suggestion => suggestion.name;
 
@@ -19,7 +20,7 @@ class StockSearch extends Component {
   }
 
   searchResults = (ticker) => {
-    const url = `https://limitless-mesa-18659.herokuapp.com/api/stocks/${ticker}`;
+    const url = `${BASE_URL}/api/stocks/${ticker}`;
     axios.get(url).then((res) => {
       this.setState({suggestions: res.data.ResultSet.Result});
     }).catch((er) => {

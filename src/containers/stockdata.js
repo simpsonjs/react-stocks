@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getOptionData, getCompanyData, getCompanyStats,
   getNewsData, getChartData } from '../actions/index';
-import Chart from '../components/chart';
+import Chart from '../components/Chart';
 import { Tabs, Tab } from 'react-bootstrap';
-import '../css/stockdata.css';
+import '../css/StockData.css';
 
-import SummaryTab from '../components/summarytab';
-import CompanyTab from '../components/companytab';
-import NewsTab from '../components/newstab';
-import StatsTab from '../components/statstab';
-import OptionsTab from '../components/optionstab';
+import SummaryTab from '../components/SummaryTab';
+import CompanyTab from '../components/CompanyTab';
+import NewsTab from '../components/NewsTab';
+import StatsTab from '../components/StatsTab';
+import OptionsTab from '../components/OptionsTab';
 
 class StockData extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.currentTicker.index !== this.props.currentTicker.index) {
+    if (nextProps.tickerData.index !== this.props.tickerData.index) {
       if (nextProps.userInfo) {
-        const ticker = nextProps.userInfo.tickers[nextProps.currentTicker.index];
+        const ticker = nextProps.userInfo.tickers[nextProps.tickerData.index];
         nextProps.getOptionData(ticker, null);
         nextProps.getCompanyData(ticker);
         nextProps.getCompanyStats(ticker);
@@ -29,13 +29,13 @@ class StockData extends Component {
   }
 
   getNewOptionData = (date) => {
-    const ticker = this.props.userInfo.tickers[this.props.currentTicker.index];
+    const ticker = this.props.userInfo.tickers[this.props.tickerData.index];
     this.props.getOptionData(ticker, date);
   }
 
   render() {
 
-    const { tickerData, currentTicker, userInfo } = this.props;
+    const { tickerData, userInfo } = this.props;
 
     return (
       <div className="col-md-7 full-height right-section-padding">
@@ -47,12 +47,12 @@ class StockData extends Component {
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
                   <SummaryTab
-                    tickerInfo={ tickerData.tickerInfo[currentTicker.index] } />
+                    tickerInfo={ tickerData.tickerInfo[tickerData.index] } />
                   <Chart
                     chartData={ tickerData.chartData }
-                    ticker={ userInfo.tickers[currentTicker.index] }
-                    isPositive={ tickerData.tickerInfo[currentTicker.index] ?
-                      tickerData.tickerInfo[currentTicker.index].change : 0 } />
+                    ticker={ userInfo.tickers[tickerData.index] }
+                    isPositive={ tickerData.tickerInfo[tickerData.index] ?
+                      tickerData.tickerInfo[tickerData.index].change : 0 } />
                 </div>
               </div>
             </Tab>
@@ -62,7 +62,7 @@ class StockData extends Component {
                 <div className="inner-container">
                   <StatsTab
                     companyStats={ tickerData.companyStats }
-                    tickerInfo={ tickerData.tickerInfo[currentTicker.index] }/>
+                    tickerInfo={ tickerData.tickerInfo[tickerData.index] }/>
                 </div>
               </div>
             </Tab>
@@ -103,10 +103,9 @@ class StockData extends Component {
   }
 }
 
-function mapStateToProps({tickerData, currentTicker, userInfo}) {
+function mapStateToProps({tickerData, userInfo}) {
   return {
     tickerData,
-    currentTicker,
     userInfo
   };
 }

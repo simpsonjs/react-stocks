@@ -13,8 +13,6 @@ const Chart = ({ chartData, ticker, isPositive }) => {
     else return '#e67e22';
   }
 
-  console.log(chartData);
-
   const config =  {
     chart: {
         backgroundColor: 'transparent',
