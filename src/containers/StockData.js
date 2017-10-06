@@ -41,7 +41,7 @@ class StockData extends Component {
       <div className="col-md-7 full-height right-section-padding">
         <div className="section-container">
 
-          <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey={1} id="stocks-info-tabs">
 
             <Tab eventKey={1} title="SUMMARY">
               <div className="hide-scroll-container-right">

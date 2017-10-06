@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 import { BASE_URL } from '../actions';
 
 const getSuggestionValue = suggestion => suggestion.name;
@@ -19,14 +20,14 @@ class StockSearch extends Component {
     }
   }
 
-  searchResults = (ticker) => {
+  searchResults = debounce((ticker) => {
     const url = `${BASE_URL}/api/stocks/${ticker}`;
     axios.get(url).then((res) => {
       this.setState({suggestions: res.data.ResultSet.Result});
     }).catch((er) => {
       console.log(er);
     });
-  }
+  }, 300)
 
   onChange = (event, { newValue }) => {
     this.setState({ value: newValue }, () => {

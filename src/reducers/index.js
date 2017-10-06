@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import TickerData from './TickerData';
-import UserInfo from './UserInfo';
+import TickerData from './ticker';
+import UserInfo from './user';
 
 const rootReducer = combineReducers({
   tickerData: TickerData,
