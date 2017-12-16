@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import StockList from '../containers/StockList';
 import StockData from '../containers/StockData';
 import '../css/App.css';
@@ -18,8 +18,7 @@ class App extends Component {
       case 'error':
         NotificationManager.error(message, title, 2000);                
         break;
-      default:
-        break;
+      default: break;
     }
   }
 

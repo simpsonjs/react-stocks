@@ -15,37 +15,23 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
     return moment.unix(date).format('MMM Do YYYY');
   }
 
+  function mapItems(items) {
+    return items.map((item) => {
+      return (
+        <tr key={item.contractSymbol} className={item.inTheMoney ? 'in-the-money': ''}>
+          <td>{item.strike}</td>
+          <td>{item.contractSymbol}</td>
+          <td>{item.lastPrice.toFixed(2)}</td>
+          <td>{item.change.toFixed(2)}</td>
+          <td>{item.volume}</td>
+          <td>{item.openInterest}</td>
+          <td>{item.impliedVolatility.toFixed(2)}</td>
+        </tr>
+      );
+    });
+  }
+
   const { calls, puts, expirationDate } = optionsData.data.options[0];
-
-  const currentDate = expirationDate;
-
-  const cItems = calls.map((item) => {
-    return (
-      <tr key={item.contractSymbol} className={item.inTheMoney ? 'in-the-money': ''}>
-        <td>{item.strike}</td>
-        <td>{item.contractSymbol}</td>
-        <td>{item.lastPrice.toFixed(2)}</td>
-        <td>{item.change.toFixed(2)}</td>
-        <td>{item.volume}</td>
-        <td>{item.openInterest}</td>
-        <td>{item.impliedVolatility.toFixed(2)}</td>
-      </tr>
-    );
-  });
-
-  const pItems = puts.map((item) => {
-    return (
-      <tr key={item.contractSymbol} className={item.inTheMoney ? 'in-the-money': ''}  >
-        <td>{item.strike}</td>
-        <td>{item.contractSymbol}</td>
-        <td>{item.lastPrice.toFixed(2)}</td>
-        <td>{item.change.toFixed(2)}</td>
-        <td>{item.volume}</td>
-        <td>{item.openInterest}</td>
-        <td>{item.impliedVolatility.toFixed(2)}</td>
-      </tr>
-    );
-  });
 
   const dropDown = optionsData.data.expirationDates.map((item, index) => {
     return (
@@ -62,14 +48,18 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
         </div>
 
         <div className="options-drop-down">
-          <DropdownButton bsStyle="default" title="Select expiry date" id="dropdown-1" onSelect={(i) => dropDownOnSelect(i)}>
+          <DropdownButton 
+            bsStyle="default" 
+            title="Select expiry date" 
+            id="dropdown-1" 
+            onSelect={(i) => dropDownOnSelect(i)}>
             {dropDown}
           </DropdownButton>
         </div>
 
-        <h3 className="blue-header">Calls for {dateFormat(currentDate)}</h3>
       </div>
 
+      <h3 className="optoins-header blue-header">Calls for {dateFormat(expirationDate)}</h3>
       <div className="col-md-12">
         <table className="table table-hover">
           <thead>
@@ -84,12 +74,12 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
             </tr>
           </thead>
           <tbody>
-            {cItems}
+            {mapItems(calls)}
           </tbody>
         </table>
       </div>
 
-      <h3 className="options-header blue-header">Puts for {dateFormat(currentDate)}</h3>
+      <h3 className="options-header blue-header">Puts for {dateFormat(expirationDate)}</h3>
       <div className="col-md-12">
         <table className="table table-hover">
           <thead>
@@ -104,7 +94,7 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
             </tr>
           </thead>
           <tbody>
-            {pItems}
+            {mapItems(puts)}
           </tbody>
         </table>
       </div>

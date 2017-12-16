@@ -7,11 +7,11 @@ import Chart from '../components/Chart';
 import { Tabs, Tab } from 'react-bootstrap';
 import '../css/StockData.css';
 
-import SummaryTab from '../components/SummaryTab';
-import CompanyTab from '../components/CompanyTab';
-import NewsTab from '../components/NewsTab';
-import StatsTab from '../components/StatsTab';
-import OptionsTab from '../components/OptionsTab';
+import SummaryTab from '../components/Tabs/SummaryTab';
+import CompanyTab from '../components/Tabs/CompanyTab';
+import NewsTab from '../components/Tabs/NewsTab';
+import StatsTab from '../components/Tabs/StatsTab';
+import OptionsTab from '../components/Tabs/OptionsTab';
 
 class StockData extends Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { isPositive } from '../helpers/index';
+import { isPositive } from '../../helpers/index';
 
 const SummaryTab = ({ tickerInfo }) => {
 
