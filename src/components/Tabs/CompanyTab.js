@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CompanyTab = ({ companyInfo }) => {
-
   if (!companyInfo.data) return null;
 
   function execs() {
@@ -20,7 +19,6 @@ const CompanyTab = ({ companyInfo }) => {
 
   return (
     <div>
-
       <div className="section-heading">
         <h3 className="blue-header">Company profile</h3>
       </div>
@@ -73,7 +71,9 @@ const CompanyTab = ({ companyInfo }) => {
             </tr>
             <tr>
               <td className="leftPull">Full time employees</td>
-              <td className="rightPull">{companyInfo.data.fullTimeEmployees}</td>
+              <td className="rightPull">
+                {companyInfo.data.fullTimeEmployees}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -81,7 +81,9 @@ const CompanyTab = ({ companyInfo }) => {
 
       <div>
         <h3 className="section-heading blue-header">Description</h3>
-        <p className="section-heading">{companyInfo.data.longBusinessSummary}</p>
+        <p className="section-heading">
+          {companyInfo.data.longBusinessSummary}
+        </p>
       </div>
 
       <h3 className="section-heading blue-header">Key Executives</h3>
@@ -96,14 +98,11 @@ const CompanyTab = ({ companyInfo }) => {
               <th>Age</th>
             </tr>
           </thead>
-          <tbody>
-            {execs()}
-          </tbody>
+          <tbody>{execs()}</tbody>
         </table>
       </div>
-
     </div>
   );
-}
+};
 
 export default CompanyTab;

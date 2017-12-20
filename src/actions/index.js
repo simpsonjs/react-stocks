@@ -1,18 +1,18 @@
 import axios from 'axios';
-
-export const FETCH_TICKER_DATA = 'FETCH_TICKER_DATA';
-export const REMOVE_TICKER = 'REMOVE_TICKER';
-export const ADD_TICKER = 'ADD_TICKER';
-export const GET_USER_DATA = 'GET_USER_DATA';
-export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
-export const CHANGE_CURRENT_INDEX = 'CHANGE_CURRENT_INDEX';
-export const GET_OPTION_DATA = 'GET_OPTION_DATA';
-export const GET_COMPANY_DATA = 'GET_COMPANY_DATA';
-export const GET_COMPANY_STATS = 'GET_COMPANY_STATS';
-export const GET_NEWS_DATA = 'GET_NEWS_DATA';
-export const GET_CHART_DATA = 'GET_CHART_DATA';
-
-export const BASE_URL = 'http://stocks.thejoshuasimpson.com';
+import {
+  FETCH_TICKER_DATA,
+  REMOVE_TICKER,
+  ADD_TICKER,
+  GET_USER_DATA,
+  UPDATE_USER_DATA,
+  CHANGE_CURRENT_INDEX,
+  GET_OPTION_DATA,
+  GET_COMPANY_DATA,
+  GET_COMPANY_STATS,
+  GET_NEWS_DATA,
+  GET_CHART_DATA,
+  BASE_URL
+} from './types';
 
 export function getChartData(ticker) {
   const url = `${BASE_URL}/api/stocks/chart/${ticker}`;
@@ -77,8 +77,8 @@ export function getUserData(user) {
   const url = `${BASE_URL}/api/users/${user}`;
   const request = axios.get(url);
   return (dispatch, getState) => {
-    request.then((res) => {
-      dispatch({type: GET_USER_DATA, payload: res.data[0]});
+    request.then(res => {
+      dispatch({ type: GET_USER_DATA, payload: res.data[0] });
       dispatch(getTickerInfo(getState().userInfo.tickers.join(',')));
       dispatch(changeCurrentIndex(0));
     });
@@ -98,7 +98,7 @@ export function updateUserData(user) {
 
 export function removeTicker(index) {
   return (dispatch, getState) => {
-    dispatch({type: REMOVE_TICKER, payload: index});
+    dispatch({ type: REMOVE_TICKER, payload: index });
     dispatch(getTickerInfo(getState().userInfo.tickers.join(',')));
     dispatch(updateUserData(getState().userInfo));
   };
@@ -106,7 +106,7 @@ export function removeTicker(index) {
 
 export function addTicker(ticker) {
   return (dispatch, getState) => {
-    dispatch({type: ADD_TICKER, payload: ticker});
+    dispatch({ type: ADD_TICKER, payload: ticker });
     dispatch(getTickerInfo(getState().userInfo.tickers.join(',')));
     dispatch(updateUserData(getState().userInfo));
   };

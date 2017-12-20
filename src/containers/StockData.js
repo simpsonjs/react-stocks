@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getOptionData, getCompanyData, getCompanyStats,
-  getNewsData, getChartData } from '../actions/index';
+import {
+  getOptionData,
+  getCompanyData,
+  getCompanyStats,
+  getNewsData,
+  getChartData
+} from '../actions/index';
 import Chart from '../components/Chart';
 import { Tabs, Tab } from 'react-bootstrap';
 import '../css/StockData.css';
@@ -14,7 +19,6 @@ import StatsTab from '../components/Tabs/StatsTab';
 import OptionsTab from '../components/Tabs/OptionsTab';
 
 class StockData extends Component {
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.tickerData.index !== this.props.tickerData.index) {
       if (nextProps.userInfo) {
@@ -28,31 +32,34 @@ class StockData extends Component {
     }
   }
 
-  getNewOptionData = (date) => {
+  getNewOptionData = date => {
     const ticker = this.props.userInfo.tickers[this.props.tickerData.index];
     this.props.getOptionData(ticker, date);
-  }
+  };
 
   render() {
-
     const { tickerData, userInfo } = this.props;
 
     return (
       <div className="col-md-7 full-height right-section-padding">
         <div className="section-container">
-
+        
           <Tabs defaultActiveKey={1} id="stocks-info-tabs">
-
             <Tab eventKey={1} title="SUMMARY">
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
                   <SummaryTab
-                    tickerInfo={ tickerData.tickerInfo[tickerData.index] } />
+                    tickerInfo={tickerData.tickerInfo[tickerData.index]}
+                  />
                   <Chart
-                    chartData={ tickerData.chartData }
-                    ticker={ userInfo.tickers[tickerData.index] }
-                    isPositive={ tickerData.tickerInfo[tickerData.index] ?
-                      tickerData.tickerInfo[tickerData.index].change : 0 } />
+                    chartData={tickerData.chartData}
+                    ticker={userInfo.tickers[tickerData.index]}
+                    isPositive={
+                      tickerData.tickerInfo[tickerData.index]
+                        ? tickerData.tickerInfo[tickerData.index].change
+                        : 0
+                    }
+                  />
                 </div>
               </div>
             </Tab>
@@ -61,8 +68,9 @@ class StockData extends Component {
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
                   <StatsTab
-                    companyStats={ tickerData.companyStats }
-                    tickerInfo={ tickerData.tickerInfo[tickerData.index] }/>
+                    companyStats={tickerData.companyStats}
+                    tickerInfo={tickerData.tickerInfo[tickerData.index]}
+                  />
                 </div>
               </div>
             </Tab>
@@ -70,8 +78,7 @@ class StockData extends Component {
             <Tab eventKey={3} title="COMPANY">
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
-                  <CompanyTab
-                    companyInfo={ tickerData.companyInfo } />
+                  <CompanyTab companyInfo={tickerData.companyInfo} />
                 </div>
               </div>
             </Tab>
@@ -80,8 +87,9 @@ class StockData extends Component {
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
                   <OptionsTab
-                    optionsData={ tickerData.optionsInfo }
-                    getOptionData={ this.getNewOptionData } />
+                    optionsData={tickerData.optionsInfo}
+                    getOptionData={this.getNewOptionData}
+                  />
                 </div>
               </div>
             </Tab>
@@ -89,12 +97,10 @@ class StockData extends Component {
             <Tab eventKey={5} title="NEWS">
               <div className="hide-scroll-container-right">
                 <div className="inner-container">
-                  <NewsTab
-                    newsInfo={ tickerData.newsInfo } />
+                  <NewsTab newsInfo={tickerData.newsInfo} />
                 </div>
               </div>
             </Tab>
-
           </Tabs>
 
         </div>
@@ -103,7 +109,7 @@ class StockData extends Component {
   }
 }
 
-function mapStateToProps({tickerData, userInfo}) {
+function mapStateToProps({ tickerData, userInfo }) {
   return {
     tickerData,
     userInfo

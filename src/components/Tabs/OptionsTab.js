@@ -3,7 +3,6 @@ import { DropdownButton, MenuItem } from 'react-bootstrap';
 import moment from 'moment';
 
 const OptionsTab = ({ optionsData, getOptionData }) => {
-
   if (!optionsData.data) return null;
   if (!optionsData.data.options[0]) return null;
 
@@ -16,9 +15,12 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
   }
 
   function mapItems(items) {
-    return items.map((item) => {
+    return items.map(item => {
       return (
-        <tr key={item.contractSymbol} className={item.inTheMoney ? 'in-the-money': ''}>
+        <tr
+          key={item.contractSymbol}
+          className={item.inTheMoney ? 'in-the-money' : ''}
+        >
           <td>{item.strike}</td>
           <td>{item.contractSymbol}</td>
           <td>{item.lastPrice.toFixed(2)}</td>
@@ -35,31 +37,32 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
 
   const dropDown = optionsData.data.expirationDates.map((item, index) => {
     return (
-      <MenuItem eventKey={index} key={item}>{dateFormat(item)}</MenuItem>
+      <MenuItem eventKey={index} key={item}>
+        {dateFormat(item)}
+      </MenuItem>
     );
   });
 
   return (
     <div>
-
       <div className="options-header">
-        <div className="in-the-money-div">
-          In The Money
-        </div>
+        <div className="in-the-money-div">In The Money</div>
 
         <div className="options-drop-down">
-          <DropdownButton 
-            bsStyle="default" 
-            title="Select expiry date" 
-            id="dropdown-1" 
-            onSelect={(i) => dropDownOnSelect(i)}>
+          <DropdownButton
+            bsStyle="default"
+            title="Select expiry date"
+            id="dropdown-1"
+            onSelect={i => dropDownOnSelect(i)}
+          >
             {dropDown}
           </DropdownButton>
         </div>
-
       </div>
 
-      <h3 className="optoins-header blue-header">Calls for {dateFormat(expirationDate)}</h3>
+      <h3 className="optoins-header blue-header">
+        Calls for {dateFormat(expirationDate)}
+      </h3>
       <div className="col-md-12">
         <table className="table table-hover">
           <thead>
@@ -73,13 +76,13 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
               <th>Implied Volatility</th>
             </tr>
           </thead>
-          <tbody>
-            {mapItems(calls)}
-          </tbody>
+          <tbody>{mapItems(calls)}</tbody>
         </table>
       </div>
 
-      <h3 className="options-header blue-header">Puts for {dateFormat(expirationDate)}</h3>
+      <h3 className="options-header blue-header">
+        Puts for {dateFormat(expirationDate)}
+      </h3>
       <div className="col-md-12">
         <table className="table table-hover">
           <thead>
@@ -93,15 +96,11 @@ const OptionsTab = ({ optionsData, getOptionData }) => {
               <th>Implied Volatility</th>
             </tr>
           </thead>
-          <tbody>
-            {mapItems(puts)}
-          </tbody>
+          <tbody>{mapItems(puts)}</tbody>
         </table>
       </div>
-
     </div>
   );
-
-}
+};
 
 export default OptionsTab;

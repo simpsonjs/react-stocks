@@ -4,7 +4,7 @@ import UserInfo from './user';
 
 const rootReducer = combineReducers({
   tickerData: TickerData,
-  userInfo: UserInfo,
+  userInfo: UserInfo
 });
 
 export default rootReducer;

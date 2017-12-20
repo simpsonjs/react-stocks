@@ -1,22 +1,31 @@
 import React from 'react';
-import { isPositive } from '../helpers/index';
 
-const StockList = ({tickerInfo, removeTicker, refreshTickers, changeIndex}) => {
-
+const StockList = ({ tickerInfo, removeTicker, refreshTickers, changeIndex }) => {
   if (!tickerInfo) return null;
 
-  function items () {
+  function onRemoveTicker(e, index) {
+    e.stopPropagation();
+    removeTicker(index);
+  }
+
+  function items() {
     return tickerInfo.map((item, index) => {
       return (
         <tr key={item.symbol} onClick={() => changeIndex(index)}>
-          <td>{item.symbol.toUpperCase()}({item.exchange})</td>
+          <td>
+            {item.symbol.toUpperCase()}({item.exchange})
+          </td>
           <td>{item.price}</td>
-          <td>{item.dayLow} - {item.dayHigh}</td>
-          <td className={isPositive(item.change) ? "green-text" : "red-text" }>{item.percentChange}</td>
-          <td><a onClick={(e) => {
-              e.stopPropagation();
-              removeTicker(index);
-            }}><i className="glyphicon glyphicon-remove"></i></a>
+          <td>
+            {item.dayLow} - {item.dayHigh}
+          </td>
+          <td className={item.change < 0 ? 'red-text' : 'green-text'}>
+            {item.percentChange}
+          </td>
+          <td>
+            <a onClick={e => onRemoveTicker(e, index)}>
+              <i className="glyphicon glyphicon-remove" />
+            </a>
           </td>
         </tr>
       );
@@ -31,14 +40,16 @@ const StockList = ({tickerInfo, removeTicker, refreshTickers, changeIndex}) => {
           <th>Price</th>
           <th>Day Range</th>
           <th>Change</th>
-          <th><a onClick={() => refreshTickers()}><i className="glyphicon glyphicon-refresh"></i></a></th>
+          <th>
+            <a onClick={() => refreshTickers()}>
+              <i className="glyphicon glyphicon-refresh" />
+            </a>
+          </th>
         </tr>
       </thead>
-      <tbody>
-        {items()}
-      </tbody>
+      <tbody>{items()}</tbody>
     </table>
   );
-}
+};
 
 export default StockList;

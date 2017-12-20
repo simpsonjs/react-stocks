@@ -1,18 +1,18 @@
 import React from 'react';
-import { isPositive } from '../../helpers/index';
 
 const SummaryTab = ({ tickerInfo }) => {
-
   if (!tickerInfo) return null;
 
   return (
     <div>
-
       <div className="section-heading">
         <h3>{tickerInfo.name}</h3>
-
-        <h3>{tickerInfo.price} <span className={isPositive(tickerInfo.change) ? "green-text" : "red-text" }>
-          {tickerInfo.change} ({tickerInfo.percentChange})</span></h3>
+        <h3>
+          {tickerInfo.price}
+          <span className={tickerInfo.change < 0 ? 'red-text' : 'green-text'}>
+            {tickerInfo.change} ({tickerInfo.percentChange})
+          </span>
+        </h3>
       </div>
 
       <div className="col-md-4">
@@ -95,9 +95,8 @@ const SummaryTab = ({ tickerInfo }) => {
           </tbody>
         </table>
       </div>
-
     </div>
   );
-}
+};
 
 export default SummaryTab;

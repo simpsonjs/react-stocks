@@ -1,5 +1,12 @@
-import { FETCH_TICKER_DATA, GET_OPTION_DATA, GET_COMPANY_DATA,
-  GET_COMPANY_STATS, GET_NEWS_DATA, GET_CHART_DATA, CHANGE_CURRENT_INDEX } from '../actions/index';
+import {
+  FETCH_TICKER_DATA,
+  GET_OPTION_DATA,
+  GET_COMPANY_DATA,
+  GET_COMPANY_STATS,
+  GET_NEWS_DATA,
+  GET_CHART_DATA,
+  CHANGE_CURRENT_INDEX
+} from '../actions/types';
 
 const INIT_STATE = {
   tickerInfo: [],
@@ -12,8 +19,7 @@ const INIT_STATE = {
 };
 
 export default function(state = INIT_STATE, action) {
-
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_TICKER_DATA:
       return {
         ...state,
@@ -28,29 +34,28 @@ export default function(state = INIT_STATE, action) {
       return {
         ...state,
         companyInfo: action.payload
-      }
+      };
     case GET_COMPANY_STATS:
       return {
         ...state,
         companyStats: action.payload
-      }
+      };
     case GET_NEWS_DATA:
       return {
         ...state,
         newsInfo: action.payload
-      }
+      };
     case GET_CHART_DATA:
       return {
         ...state,
         chartData: action.payload
-      }
+      };
     case CHANGE_CURRENT_INDEX:
       return {
         ...state,
         index: action.payload
-      }
+      };
     default:
       return state;
   }
-
 }

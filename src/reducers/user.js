@@ -1,15 +1,18 @@
-import { REMOVE_TICKER , ADD_TICKER, GET_USER_DATA, UPDATE_USER_DATA} from '../actions/index';
+import {
+  REMOVE_TICKER,
+  ADD_TICKER,
+  GET_USER_DATA,
+  UPDATE_USER_DATA
+} from '../actions/types';
 
 const INIT_STATE = {
   _id: 0,
   username: '',
-  password: '',
   tickers: []
 };
 
 export default function(state = INIT_STATE, action) {
-
-  switch(action.type) {
+  switch (action.type) {
     case REMOVE_TICKER:
       return {
         ...state,
@@ -20,12 +23,11 @@ export default function(state = INIT_STATE, action) {
         ...state,
         tickers: state.tickers.concat(action.payload)
       };
-    case UPDATE_USER_DATA:
-      return state;
     case GET_USER_DATA:
       return action.payload;
+    case UPDATE_USER_DATA:
+      return state;
     default:
       return state;
   }
-
 }
